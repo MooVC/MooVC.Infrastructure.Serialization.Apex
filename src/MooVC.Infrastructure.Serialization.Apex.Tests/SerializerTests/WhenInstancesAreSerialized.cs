@@ -1,5 +1,6 @@
 ﻿namespace MooVC.Infrastructure.Serialization.Apex.SerializerTests
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
@@ -11,8 +12,10 @@
     using Serializer = MooVC.Infrastructure.Serialization.Apex.Serializer;
 
     public sealed class WhenInstancesAreSerialized
+        : IDisposable
     {
         private readonly ISerializer serializer;
+        private bool isDisposed;
 
         public WhenInstancesAreSerialized()
         {
@@ -20,6 +23,13 @@
                 .MarkSerializable(type => true);
 
             serializer = new Serializer(settings: settings);
+        }
+
+        public void Dispose()
+        {
+            Dispose(isDisposing: true);
+
+            GC.SuppressFinalize(this);
         }
 
         [Fact]
@@ -351,6 +361,19 @@
             else
             {
                 Assert.Null(deserialized);
+            }
+        }
+
+        private void Dispose(bool isDisposing)
+        {
+            if (!isDisposed)
+            {
+                if (isDisposing)
+                {
+                    ((IDisposable)serializer).Dispose();
+                }
+
+                isDisposed = true;
             }
         }
     }

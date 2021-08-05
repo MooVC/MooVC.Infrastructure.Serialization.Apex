@@ -28,7 +28,7 @@
 
         public void Dispose()
         {
-            Dispose(disposing: true);
+            Dispose(isDisposing: true);
 
             GC.SuppressFinalize(this);
         }
@@ -43,11 +43,11 @@
             Binary.Write(instance, target);
         }
 
-        private void Dispose(bool disposing)
+        private void Dispose(bool isDisposing)
         {
             if (!isDisposed)
             {
-                if (disposing && binary.IsValueCreated)
+                if (isDisposing && binary.IsValueCreated)
                 {
                     Binary.Dispose();
                 }

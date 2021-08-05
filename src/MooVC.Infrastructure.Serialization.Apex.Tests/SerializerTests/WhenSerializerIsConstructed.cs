@@ -8,7 +8,7 @@
         [Fact]
         public void GivenNoSettingsThenADefaultSerializerIsCreated()
         {
-            _ = new Serializer();
+            using var serializer = new Serializer();
         }
 
         [Fact]
@@ -24,7 +24,7 @@
                 UseSerializedVersionId = true,
             };
 
-            _ = new Serializer(settings: settings);
+            using var serializer = new Serializer(settings: settings);
         }
     }
 }
