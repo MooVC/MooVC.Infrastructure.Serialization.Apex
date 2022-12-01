@@ -4,7 +4,6 @@
 
 The MooVC Infrastructural Serialization library for Apex.Serialization is designed to encapsulate the Apex implementation through the standardized MooVC.Serialization interpretation, facilitating ease of consumption within inner layers without direct coupling to infrastructural concerns.
 
-# Release v2.0.0
+# Release v3.0.0
 
-- Changed to target MooVC V6.* (**breaking change**).
-- Changed to target NET 6 in addition to NET 5.
+- Updated to target MooVC 7.x (**Breaking Change**).

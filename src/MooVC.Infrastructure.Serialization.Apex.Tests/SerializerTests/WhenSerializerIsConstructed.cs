@@ -1,30 +1,29 @@
-﻿namespace MooVC.Infrastructure.Serialization.Apex.SerializerTests
+﻿namespace MooVC.Infrastructure.Serialization.Apex.SerializerTests;
+
+using global::Apex.Serialization;
+using Xunit;
+
+public sealed class WhenSerializerIsConstructed
 {
-    using global::Apex.Serialization;
-    using Xunit;
-
-    public sealed class WhenSerializerIsConstructed
+    [Fact]
+    public void GivenNoSettingsThenADefaultSerializerIsCreated()
     {
-        [Fact]
-        public void GivenNoSettingsThenADefaultSerializerIsCreated()
-        {
-            using var serializer = new Serializer();
-        }
+        using var serializer = new Serializer();
+    }
 
-        [Fact]
-        public void GivenSettingsThenASerializerIsCreatedWithTheSettingsApplied()
+    [Fact]
+    public void GivenSettingsThenASerializerIsCreatedWithTheSettingsApplied()
+    {
+        var settings = new Settings
         {
-            var settings = new Settings
-            {
-                AllowFunctionSerialization = false,
-                FlattenClassHierarchy = true,
-                InliningMaxDepth = 4,
-                SerializationMode = Mode.Graph,
-                SupportSerializationHooks = true,
-                UseSerializedVersionId = true,
-            };
+            AllowFunctionSerialization = false,
+            FlattenClassHierarchy = true,
+            InliningMaxDepth = 4,
+            SerializationMode = Mode.Graph,
+            SupportSerializationHooks = true,
+            UseSerializedVersionId = true,
+        };
 
-            using var serializer = new Serializer(settings: settings);
-        }
+        using var serializer = new Serializer(settings: settings);
     }
 }

@@ -1,59 +1,56 @@
-﻿namespace MooVC.Infrastructure.Serialization.Apex
+﻿namespace MooVC.Infrastructure.Serialization.Apex;
+
+using System;
+using System.IO;
+using global::Apex.Serialization;
+using MooVC.Compression;
+using MooVC.Serialization;
+using static global::Apex.Serialization.Binary;
+
+public sealed class Serializer
+    : SynchronousSerializer,
+      IDisposable
 {
-    using System;
-    using System.IO;
-    using global::Apex.Serialization;
-    using MooVC.Compression;
-    using MooVC.Serialization;
-    using static global::Apex.Serialization.Binary;
+    private readonly Lazy<IBinary> binary;
+    private bool isDisposed;
 
-    public sealed class Serializer
-        : SynchronousSerializer,
-          IDisposable
+    public Serializer(ICompressor? compressor = default, Settings? settings = default)
+        : base(compressor: compressor)
     {
-        private readonly Lazy<IBinary> binary;
-        private bool isDisposed;
+        settings ??= new Settings();
 
-        public Serializer(
-            ICompressor? compressor = default,
-            Settings? settings = default)
-            : base(compressor: compressor)
+        binary = new(Create(settings));
+    }
+
+    public IBinary Binary => binary.Value;
+
+    public void Dispose()
+    {
+        Dispose(isDisposing: true);
+
+        GC.SuppressFinalize(this);
+    }
+
+    protected override T PerformDeserialize<T>(Stream source)
+    {
+        return Binary.Read<T>(source);
+    }
+
+    protected override void PerformSerialize<T>(T instance, Stream target)
+    {
+        Binary.Write(instance, target);
+    }
+
+    private void Dispose(bool isDisposing)
+    {
+        if (!isDisposed)
         {
-            settings ??= new Settings();
-
-            binary = new(Create(settings));
-        }
-
-        public IBinary Binary => binary.Value;
-
-        public void Dispose()
-        {
-            Dispose(isDisposing: true);
-
-            GC.SuppressFinalize(this);
-        }
-
-        protected override T PerformDeserialize<T>(Stream source)
-        {
-            return Binary.Read<T>(source);
-        }
-
-        protected override void PerformSerialize<T>(T instance, Stream target)
-        {
-            Binary.Write(instance, target);
-        }
-
-        private void Dispose(bool isDisposing)
-        {
-            if (!isDisposed)
+            if (isDisposing && binary.IsValueCreated)
             {
-                if (isDisposing && binary.IsValueCreated)
-                {
-                    Binary.Dispose();
-                }
-
-                isDisposed = true;
+                Binary.Dispose();
             }
+
+            isDisposed = true;
         }
     }
 }
