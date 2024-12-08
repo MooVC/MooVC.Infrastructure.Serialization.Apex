@@ -4,19 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8E15DF3F-0EBC-4769-8FEA-D898EFB9C19E}"
-	ProjectSection(SolutionItems) = preProject
-		..\.editorconfig = ..\.editorconfig
-		..\.gitignore = ..\.gitignore
-		..\.runsettings = ..\.runsettings
-		..\azure-pipelines.yml = ..\azure-pipelines.yml
-		..\directory.build.props = ..\directory.build.props
-		..\gitversion.yml = ..\gitversion.yml
-		..\LICENSE = ..\LICENSE
-		..\nuget.config = ..\nuget.config
-		..\README.md = ..\README.md
-		..\analyzers\stylecop.code.ruleset = ..\analyzers\stylecop.code.ruleset
-		..\analyzers\stylecop.tests.ruleset = ..\analyzers\stylecop.tests.ruleset
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MooVC.Infrastructure.Serialization.Apex", "MooVC.Infrastructure.Serialization.Apex\MooVC.Infrastructure.Serialization.Apex.csproj", "{A59CEFEF-40D2-4782-A84E-5CB27D8D5F5E}"
 EndProject
