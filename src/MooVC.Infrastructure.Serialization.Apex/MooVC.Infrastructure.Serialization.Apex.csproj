@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>A library designed to encapsulate the Apex.Serialization implementation through the standardized MooVC.Serialization interpretation, facilitating ease of consumption within inner layers without direct coupling to infrastructural concerns.</Description>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Apex.Serialization" Version="3.*" />
-    <PackageReference Include="MooVC" Version="7.*" />
+    <PackageReference Include="Apex.Serialization" Version="5.0.2" />
+    <PackageReference Include="MooVC" Version="8.0.0" />
   </ItemGroup>
 </Project>
